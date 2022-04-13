@@ -349,9 +349,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124894447}
+  - component: {fileID: 1124894448}
   - component: {fileID: 1124894450}
   - component: {fileID: 1124894451}
-  - component: {fileID: 1124894448}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -387,8 +387,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d5f8f4753729f44ba8e2a268ca15de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  mousePosition: {x: 0, y: 0}
+  maxSpeed: 10
+  currentSpeed: 0
+  speedT: 0.99
+  pointerPosition: {x: 0, y: 0}
+  hasMove: 0
+  targetSpeed: 0
+  Velocity: 0
 --- !u!50 &1124894450
 Rigidbody2D:
   serializedVersion: 4

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class PlayerController : PhysicsController
     private float currentSpeed = 0f;
     [SerializeField]
     private float speedT = 0.05f;
+    [SerializeField]
+    private RangeFloat accTime = new RangeFloat(0,1f);
+
+    private float accDuration = 0.5f;
+
+    public float acc;
 
     private float horizontal;
     private float vertical;
@@ -55,7 +62,11 @@ public class PlayerController : PhysicsController
         }
     }
 
+    public AnimationCurve accelerationCurve;
+
     public float Velocity;
+
+    public BulletController bulletPrefab;
 
     private void Start()
     {
@@ -68,7 +79,19 @@ public class PlayerController : PhysicsController
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         direction = new Vector2(horizontal, vertical);
-        currentSpeed = Mathf.Lerp(currentSpeed, TargetSpeed, speedT * Time.deltaTime);
+        //currentSpeed = Mathf.Lerp(currentSpeed, TargetSpeed, speedT * Time.deltaTime);
+        
+        if(HasMovement)
+        {
+            accTime.Add(Time.deltaTime / accDuration);
+        } 
+        else
+        {
+            accTime.Sub(Time.deltaTime / accDuration);
+        }
+        acc = accTime.Current;
+
+        currentSpeed = maxSpeed * accelerationCurve.Evaluate(accTime.Current);
         rb.velocity = LastDirection.normalized * currentSpeed;
 
         pointerPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,6 +107,20 @@ public class PlayerController : PhysicsController
         hasMove = HasMovement;
         targetSpeed = TargetSpeed;
 
+        HandleWeapons();
     }
 
+    private void HandleWeapons()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            FireWeapon();
+        }
+    }
+
+    private void FireWeapon()
+    {
+        BulletController bulletController = Instantiate<BulletController>(bulletPrefab, tf.position, tf.rotation);
+        bulletController.Speed = 10f;
+    }
 }

@@ -66,11 +66,34 @@ public class PlayerController : PhysicsController
 
     public float Velocity;
 
-    public BulletController bulletPrefab;
+    protected List<Weapon> weapons = new List<Weapon>();
 
     private void Start()
     {
-        
+        weapons.AddRange(tf.GetComponentsInChildren<Weapon>());
+
+        WeaponDTO revolver = new WeaponDTO()
+        {
+            Accuracy = 0.95f,
+            AmmoMax = 6,
+            Damage = 50,
+            Distance = 5,
+            FireRate = 1,
+            ReloadTime = 2,
+            Speed = 8
+        };
+
+        WeaponDTO machineGun = new WeaponDTO()
+        {
+            Accuracy = 0.8f,
+            AmmoMax = 30,
+            Damage = 50,
+            Distance = 8,
+            FireRate = 0.2f,
+            ReloadTime = 1.5f,
+            Speed = 8
+        };
+
     }
 
     // Update is called once per frame
@@ -120,7 +143,9 @@ public class PlayerController : PhysicsController
 
     private void FireWeapon()
     {
-        BulletController bulletController = Instantiate<BulletController>(bulletPrefab, tf.position, tf.rotation);
-        bulletController.Speed = 10f;
+        //BulletController bulletController = Instantiate<BulletController>(bulletPrefab, tf.position, tf.rotation);
+        //bulletController.Init(10f, 3f);
+
+        weapons[0].Fire();
     }
 }

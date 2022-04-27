@@ -152,11 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38998373ff8efd6468e8383b0199db5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    Name: 
-  weapon:
-    Name: 
-    Damage: 0
+  item: {fileID: 0}
+  weapon: {fileID: 0}
 --- !u!4 &148631731
 Transform:
   m_ObjectHideFlags: 0
@@ -505,7 +502,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Velocity: 0
-  bulletPrefab: {fileID: 8393238413569137231, guid: f025b1fddcf41f5418fef8b6100a04b2, type: 3}
 --- !u!50 &1124894450
 Rigidbody2D:
   serializedVersion: 4
@@ -555,6 +551,37 @@ PolygonCollider2D:
     - - {x: -0.25, y: 0.43359375}
       - {x: -0.25, y: -0.43359375}
       - {x: 0.5, y: 0}
+--- !u!1 &1419940008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1419940009}
+  m_Layer: 0
+  m_Name: BulletRespawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1419940009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419940008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.514, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2080160211}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1809190571
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,6 +624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080160211}
   - component: {fileID: 2080160212}
+  - component: {fileID: 2080160213}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -615,7 +643,8 @@ Transform:
   m_LocalPosition: {x: 0.28, y: 0.09, z: 0}
   m_LocalScale: {x: 0.44356966, y: 0.12818116, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1419940009}
   m_Father: {fileID: 1809190572}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -659,7 +688,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 07decfe4b076d4c45a9afc0e358772e5, type: 3}
   m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_FlipX: 0
@@ -671,3 +700,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2080160213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080160210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fd4e53281aae749afae32f81792bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Damage: 0
+  bulletPrefab: {fileID: 0}

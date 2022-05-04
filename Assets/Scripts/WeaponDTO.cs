@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponDTO
+[CreateAssetMenu(fileName = "WeaponDTO",menuName = "DTO/WeaponDTO")]
+public class WeaponDTO : ItemDTO
 {
     public int Damage;
     public float FireRate;

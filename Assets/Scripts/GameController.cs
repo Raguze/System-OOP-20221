@@ -9,13 +9,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        item = new Item();
-        item.Name = "Potion";
+        
 
-        weapon = new Weapon()
-        {
-            Name = "Pistol",
-            Damage = 10
-        };
+
+        
     }
 }

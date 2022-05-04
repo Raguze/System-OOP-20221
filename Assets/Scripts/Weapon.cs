@@ -8,18 +8,17 @@ public class Weapon : Item
 {
     private Transform bulletRespawn;
 
-    public int Damage;
+    public WeaponDTO dto;
 
     public BulletController bulletPrefab;
 
-
-    // Damage
-    // FireRate
-    // ReloadTime
-    // AmmoMax
-    // Distance
-    // Speed
-    // Accuracy
+    public int Damage { get; protected set; }
+    public float FireRate { get; protected set; }
+    public float ReloadTime { get; protected set; }
+    public int AmmoMax { get; protected set; }
+    public float Distance { get; protected set; }
+    public float Speed { get; protected set; }
+    public float Accuracy { get; protected set; }
 
     protected override void Awake()
     {
@@ -38,14 +37,24 @@ public class Weapon : Item
         }
     }
 
-    public void Init(WeaponDTO dto)
+    public virtual void Init(WeaponDTO wdto)
     {
-
+        dto = wdto;
+        Damage = wdto.Damage;
+        FireRate = wdto.FireRate;
+        ReloadTime = wdto.ReloadTime;
+        AmmoMax = wdto.AmmoMax;
+        Distance = wdto.Distance;
+        Speed = wdto.Speed;
+        Accuracy = wdto.Accuracy;
     }
 
-    public void Fire()
+    public virtual void Fire()
     {
-        BulletController bulletController = Instantiate<BulletController>(bulletPrefab, bulletRespawn.position, tf.rotation);
-        bulletController.Init(10f, 3f);
+        //BulletController bulletController = Instantiate<BulletController>(bulletPrefab, bulletRespawn.position, tf.rotation);
+        //bulletController.Init(10f, 3f);
+        GameObject go = Factory.Instance.Create("bullet", bulletRespawn.position, tf.rotation);
+        BulletController bc = go.GetComponent<BulletController>();
+        bc.Init(10f, 3f);
     }
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class Item : BaseTransform
 {
-    public string Name;
+    public string Name { get; set; }
 }

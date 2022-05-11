@@ -53,8 +53,8 @@ public class Weapon : Item
     {
         //BulletController bulletController = Instantiate<BulletController>(bulletPrefab, bulletRespawn.position, tf.rotation);
         //bulletController.Init(10f, 3f);
-        GameObject go = Factory.Instance.Create("bullet", bulletRespawn.position, tf.rotation);
+        GameObject go = Factory.Instance.GetObject(FactoryItem.Bullet);
         BulletController bc = go.GetComponent<BulletController>();
-        bc.Init(10f, 3f);
+        bc.Init(10f, 5f, bulletRespawn.position, bulletRespawn.rotation);
     }
 }

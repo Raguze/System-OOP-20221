@@ -135,11 +135,12 @@ public class PlayerController : PhysicsController
 
     private void HandleWeapons()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0))
         {
             FireWeapon();
         }
     }
+                                                        
 
     private void FireWeapon()
     {

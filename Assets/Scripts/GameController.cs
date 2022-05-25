@@ -7,11 +7,10 @@ public class GameController : MonoBehaviour
     public Item item;
     public Weapon weapon;
 
-    void Start()
+    private InputController ic;
+
+    private void Awake()
     {
-        
-
-
-        
+        ic = gameObject.AddComponent<InputController>();
     }
 }

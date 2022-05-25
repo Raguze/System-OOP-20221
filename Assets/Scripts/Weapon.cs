@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 [System.Serializable]
-public class Weapon : Item
+public abstract class Weapon : Item
 {
-    private Transform bulletRespawn;
+    protected Transform bulletRespawn;
 
     public WeaponDTO dto;
 
@@ -20,11 +20,21 @@ public class Weapon : Item
     public float Speed { get; protected set; }
     public float Accuracy { get; protected set; }
 
+    private bool isFireRateCooldown;
+
+    public bool CanFire 
+    { 
+        get
+        {
+            return !isFireRateCooldown;
+        } 
+    }
+
     protected override void Awake()
     {
         base.Awake();
 
-        bulletPrefab = Resources.Load<BulletController>("Prefabs/Bullet");
+        //bulletPrefab = Resources.Load<BulletController>("Prefabs/Bullet");
 
         Transform[] children = tf.GetComponentsInChildren<Transform>();
         foreach (var child in children)
@@ -49,10 +59,28 @@ public class Weapon : Item
         Accuracy = wdto.Accuracy;
     }
 
+    IEnumerator FireRateCooldown()
+    {
+        Debug.Log($"Fire Rate {FireRate}");
+        isFireRateCooldown = true;
+        yield return new WaitForSeconds(FireRate);
+        isFireRateCooldown = false;
+    }
+
     public virtual void Fire()
     {
-        //BulletController bulletController = Instantiate<BulletController>(bulletPrefab, bulletRespawn.position, tf.rotation);
-        //bulletController.Init(10f, 3f);
+        if(!CanFire)
+        {
+            return;
+        }
+
+        StartCoroutine(FireRateCooldown());
+
+        CreateBullets();
+    }
+
+    protected virtual void CreateBullets()
+    {
         GameObject go = Factory.Instance.GetObject(FactoryItem.Bullet);
         BulletController bc = go.GetComponent<BulletController>();
         bc.Init(10f, 5f, bulletRespawn.position, bulletRespawn.rotation);

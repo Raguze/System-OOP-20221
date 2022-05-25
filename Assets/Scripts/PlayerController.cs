@@ -68,9 +68,22 @@ public class PlayerController : PhysicsController
 
     protected List<Weapon> weapons = new List<Weapon>();
 
+    protected int WeaponIndex;
+    protected Weapon CurrentWeapon
+    {
+        get
+        {
+            return weapons[WeaponIndex];
+        }
+    }
+
     private void Start()
     {
         weapons.AddRange(tf.GetComponentsInChildren<Weapon>());
+        foreach (var weapon in weapons)
+        {
+            weapon.Init(weapon.dto);
+        }
 
         WeaponDTO revolver = new WeaponDTO()
         {
@@ -78,7 +91,7 @@ public class PlayerController : PhysicsController
             AmmoMax = 6,
             Damage = 50,
             Distance = 5,
-            FireRate = 1,
+            FireRate = 0.1f,
             ReloadTime = 2,
             Speed = 8
         };
@@ -130,23 +143,39 @@ public class PlayerController : PhysicsController
         hasMove = HasMovement;
         targetSpeed = TargetSpeed;
 
+        HandleChangeWeapons();
         HandleWeapons();
+    }
+
+    protected void ChangeWeapon(int index)
+    {
+        WeaponIndex = index;
     }
 
     private void HandleWeapons()
     {
-        if(Input.GetMouseButton(0))
+        if(InputState.FireButton)
         {
             FireWeapon();
+        }
+    }
+
+    private void HandleChangeWeapons()
+    {
+        if(InputState.SelectWeapon1)
+        {
+            ChangeWeapon(0);
+        }
+
+        if (InputState.SelectWeapon2)
+        {
+            ChangeWeapon(1);
         }
     }
                                                         
 
     private void FireWeapon()
     {
-        //BulletController bulletController = Instantiate<BulletController>(bulletPrefab, tf.position, tf.rotation);
-        //bulletController.Init(10f, 3f);
-
-        weapons[0].Fire();
+        CurrentWeapon.Fire();
     }
 }

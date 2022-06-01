@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47e470dbe7c768439433f6e60b24bf8, type: 3}
-  m_Name: ShotgunDTO
+  m_Script: {fileID: 11500000, guid: e8fbe61e7c37179448d43205c4117e9e, type: 3}
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
-  Name: DoubleBarrel
-  Damage: 20
-  FireRate: 0.8
-  ReloadTime: 2
-  AmmoMax: 4
-  Distance: 4
-  Speed: 12
-  Accuracy: 1
-  Pellets: 3
-  Spread: 30
+  Name: 
+  Damage: 0
+  FireRate: 0
+  ReloadTime: 0
+  AmmoMax: 0
+  Distance: 0
+  Speed: 0
+  Accuracy: 0

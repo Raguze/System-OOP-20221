@@ -32,7 +32,14 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(FireMouseButton))
+        InputState.WeaponNext = false;
+        InputState.WeaponPrev = false;
+        InputState.SelectWeapon1 = false;
+        InputState.SelectWeapon2 = false;
+        InputState.SelectWeapon3 = false;
+        InputState.SelectWeapon4 = false;
+
+        if (Input.GetMouseButtonDown(FireMouseButton))
         {
             InputState.FireButton = true;
         }
@@ -45,6 +52,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)ChangeWeaponPrev))
         {
             InputState.WeaponPrev = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)ChangeWeaponPrev))
@@ -54,7 +62,8 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKeyDown((KeyCode)ChangeWeaponNext))
         {
-            InputState.WeaponPrev = true;
+            InputState.WeaponNext = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)ChangeWeaponNext))
@@ -65,6 +74,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)SelectWeapon1))
         {
             InputState.SelectWeapon1 = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)SelectWeapon1))
@@ -75,6 +85,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)SelectWeapon2))
         {
             InputState.SelectWeapon2 = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)SelectWeapon2))
@@ -85,6 +96,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)SelectWeapon3))
         {
             InputState.SelectWeapon3 = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)SelectWeapon3))
@@ -95,6 +107,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)SelectWeapon4))
         {
             InputState.SelectWeapon4 = true;
+            InputState.FireButton = false;
         }
 
         if (Input.GetKeyUp((KeyCode)SelectWeapon4))

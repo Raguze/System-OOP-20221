@@ -66,9 +66,9 @@ public class PlayerController : PhysicsController
 
     public float Velocity;
 
-    protected List<Weapon> weapons = new List<Weapon>();
+    public List<Weapon> weapons = new List<Weapon>();
 
-    protected int WeaponIndex;
+    public int WeaponIndex;
     protected Weapon CurrentWeapon
     {
         get
@@ -83,6 +83,7 @@ public class PlayerController : PhysicsController
         foreach (var weapon in weapons)
         {
             weapon.Init(weapon.dto);
+            weapon.gameObject.SetActive(false);
         }
 
         WeaponDTO revolver = new WeaponDTO()
@@ -106,6 +107,8 @@ public class PlayerController : PhysicsController
             ReloadTime = 1.5f,
             Speed = 8
         };
+
+        ChangeWeapon(0);
 
     }
 
@@ -149,7 +152,9 @@ public class PlayerController : PhysicsController
 
     protected void ChangeWeapon(int index)
     {
-        WeaponIndex = index;
+        CurrentWeapon.gameObject.SetActive(false);
+        WeaponIndex = (index + weapons.Count) % weapons.Count;
+        CurrentWeapon.gameObject.SetActive(true);
     }
 
     private void HandleWeapons()
@@ -162,6 +167,15 @@ public class PlayerController : PhysicsController
 
     private void HandleChangeWeapons()
     {
+        if(InputState.WeaponPrev)
+        {
+            ChangeWeapon(WeaponIndex-1);
+        }
+        if(InputState.WeaponNext)
+        {
+            ChangeWeapon(WeaponIndex+1);
+        }
+
         if(InputState.SelectWeapon1)
         {
             ChangeWeapon(0);
@@ -170,6 +184,11 @@ public class PlayerController : PhysicsController
         if (InputState.SelectWeapon2)
         {
             ChangeWeapon(1);
+        }
+
+        if (InputState.SelectWeapon3)
+        {
+            ChangeWeapon(2);
         }
     }
                                                         

@@ -50,6 +50,7 @@ public abstract class Weapon : Item
     public virtual void Init(WeaponDTO wdto)
     {
         dto = wdto;
+        Name = wdto.Name;
         Damage = wdto.Damage;
         FireRate = wdto.FireRate;
         ReloadTime = wdto.ReloadTime;
@@ -61,10 +62,11 @@ public abstract class Weapon : Item
 
     IEnumerator FireRateCooldown()
     {
-        Debug.Log($"Fire Rate {FireRate}");
         isFireRateCooldown = true;
+        Debug.Log($"{Name} Fire Rate {isFireRateCooldown}");
         yield return new WaitForSeconds(FireRate);
         isFireRateCooldown = false;
+        Debug.Log($"{Name} Fire Rate {isFireRateCooldown}");
     }
 
     public virtual void Fire()
@@ -84,5 +86,15 @@ public abstract class Weapon : Item
         GameObject go = Factory.Instance.GetObject(FactoryItem.Bullet);
         BulletController bc = go.GetComponent<BulletController>();
         bc.Init(10f, 5f, bulletRespawn.position, bulletRespawn.rotation);
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log($"{Name} enable");
+    }
+    private void OnDisable()
+    {
+        Debug.Log($"{Name} Disable");
+        isFireRateCooldown = false;
     }
 }
